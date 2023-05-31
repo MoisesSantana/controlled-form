@@ -1,4 +1,15 @@
+import { useState } from 'react';
+
+const EMAIL_REGEX = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]/i;
+
 function App() {
+  const [email, setEmail] = useState('');
+  const [pass, setPass] = useState('');
+
+  const emailIsValid = EMAIL_REGEX.test(email);
+  const passIsValid = pass.length > 6;
+  const isActive = emailIsValid && passIsValid;
+  console.log(isActive);
   return (
     <main>
       <header>
@@ -14,13 +25,29 @@ function App() {
         <img src="/logo.jpg" alt="lorem ipsum company" className="logo" />
         <div className="input-container">
           <img src="/user.svg" alt="user" />
-          <input type="text" id="email" placeholder="Username" />
+          <input
+            type="text"
+            id="email"
+            placeholder="Username"
+            value={ email }
+            onChange={ (
+              e: React.ChangeEvent<HTMLInputElement>,
+            ) => setEmail(e.target.value) }
+          />
         </div>
         <div className="input-container">
           <img src="/pass.svg" alt="password" />
-          <input type="password" id="pass" placeholder="******" />
+          <input
+            type="password"
+            id="pass"
+            placeholder="******"
+            value={ pass }
+            onChange={ (
+              e: React.ChangeEvent<HTMLInputElement>,
+            ) => setPass(e.target.value) }
+          />
         </div>
-        <button>Login</button>
+        <button disabled={ !isActive }>Login</button>
         <footer>
           <div>
             <input type="checkbox" id="remember" />
