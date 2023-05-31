@@ -96,6 +96,16 @@ button {
   transition: 300ms ease-in;
 }
 
+button:disabled {
+  opacity: 0.5;
+}
+
+button:disabled:hover {
+  opacity: 0.5;
+  filter: none;
+  cursor: not-allowed;
+}
+
 footer {
   display: flex;
   justify-content: space-between;
